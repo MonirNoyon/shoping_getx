@@ -1,6 +1,6 @@
 # shoping_getx
 
-This is Shoping App using getx as state management library
+This is Shoping App using getx as state management library \\
 What uses in this application are
 [Getx,Dependency Injection,MVVM]
 
