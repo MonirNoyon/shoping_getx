@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ProductsController productsController = Get.put(ProductsController());
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,44 +22,56 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(Icons.dehaze_sharp,color: Colors.black,),
-          onPressed: (){},
+          icon: const Icon(
+            Icons.dehaze_sharp,
+            color: Colors.black,
+          ),
+          onPressed: () {},
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined,color: Colors.black,),
-            onPressed: (){},
+            icon: const Icon(
+              Icons.shopping_cart_outlined,
+              color: Colors.black,
+            ),
+            onPressed: () {},
           )
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 10,right: 10),
+        padding: const EdgeInsets.only(left: 10, right: 10),
         child: Column(
           children: [
             Row(
               children: [
-                Expanded(child: Text("ShopX",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),)),
-                IconButton(
-                    onPressed: (){},
-                    icon: const Icon(Icons.list)),
-                IconButton(
-                    onPressed: (){},
-                    icon: const Icon(Icons.qr_code)),
+                Expanded(
+                    child: Text(
+                  "ShopX",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                )),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code)),
               ],
             ),
             Expanded(
-              child: Obx(()=> GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 5,
-                      crossAxisSpacing: 5,
-                      mainAxisExtent: size.height*0.4,
-                    ),
-                    itemCount: productsController.productsList.length,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context,index){
-                      return ProductsItem(products: productsController.productsList[index]);
-                    }),
+              child: Obx(
+                () => productsController.isLoading.value
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 5,
+                          crossAxisSpacing: 5,
+                          mainAxisExtent: size.height * 0.42,
+                        ),
+                        itemCount: productsController.productsList.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return ProductsItem(
+                              products: productsController.productsList[index]);
+                        }),
               ),
             ),
           ],

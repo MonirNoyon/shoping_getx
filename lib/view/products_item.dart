@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shoping_getx/model/product_model.dart';
+import 'package:get/get.dart';
 
 class ProductsItem extends StatelessWidget {
    ProductsItem({Key? key,required this.products});
@@ -29,12 +30,17 @@ class ProductsItem extends StatelessWidget {
                 Positioned(
                     right: -5,
                     top: -5,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 25,
-                      child: IconButton(
-                        onPressed: (){},
-                        icon: const Icon(Icons.favorite_border,color: Colors.redAccent,),
+                    child: Obx(()=> CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 25,
+                        child: IconButton(
+                          onPressed: (){
+                            products.isFavourite.toggle();
+                          },
+                          icon: products.isFavourite.value
+                                ? Icon(Icons.favorite,color: Colors.redAccent,)
+                                : Icon(Icons.favorite_border,color: Colors.redAccent,),
+                        ),
                       ),
                     )
                 )
@@ -75,7 +81,7 @@ class ProductsItem extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  Text("\u0024 ${products.price}",style: TextStyle(fontSize: 25),),
+                  Text("\u0024 ${products.price}",style: TextStyle(fontSize: 25,fontFamily: 'avenir'),),
 
                 ],
               ),

@@ -1,9 +1,5 @@
-// To parse this JSON data, do
-//
-//     final productModel = productModelFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
+import 'package:get/get.dart';
 
 List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(json.decode(str).map((x) => ProductModel.fromJson(x)));
 
@@ -51,6 +47,8 @@ class ProductModel {
   String productApiUrl;
   String apiFeaturedImage;
   List<ProductColor> productColors;
+
+  var isFavourite = false.obs;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     id: json["id"],

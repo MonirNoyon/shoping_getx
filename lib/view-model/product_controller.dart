@@ -4,6 +4,7 @@ import 'package:shoping_getx/services/remote_services.dart';
 
 
 class ProductsController extends GetxController{
+  var isLoading = true.obs;
   var productsList = <ProductModel>[].obs;
 
   @override
@@ -13,11 +14,16 @@ class ProductsController extends GetxController{
   }
 
   void fetchProducts() async{
-    var products = await RemoteServices.fetchProduct();
-    if(products!=[]){
-      productsList.value = products;
-    }else{
+    try{
+      isLoading(true);
+      var products = await RemoteServices.fetchProduct();
+      if(products!=[]){
+        productsList.value = products;
+      }else{
 
+      }
+    }finally{
+      isLoading(false);
     }
   }
 }
