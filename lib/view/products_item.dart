@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shoping_getx/model/product_model.dart';
 
 class ProductsItem extends StatelessWidget {
-  const ProductsItem({Key? key}) : super(key: key);
+   ProductsItem({Key? key,required this.products});
+   ProductModel products;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
@@ -16,17 +19,19 @@ class ProductsItem extends StatelessWidget {
             Stack(
               children: [
                 Container(
+                  width: size.width*0.45,
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(topLeft:Radius.circular(10),topRight: Radius.circular(10))
                     ),
-                    child: Image.network("https://mir-s3-cdn-cf.behance.net/projects/404/77f51075510351.Y3JvcCw4NjIsNjc1LDE2NCww.png",fit: BoxFit.cover,)),
+                    child: Image.network(products.imageLink,
+                    fit: BoxFit.cover,)),
                 Positioned(
                     right: -5,
-                    top: -8,
+                    top: -5,
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      radius: 22,
+                      radius: 25,
                       child: IconButton(
                         onPressed: (){},
                         icon: const Icon(Icons.favorite_border,color: Colors.redAccent,),
@@ -43,7 +48,7 @@ class ProductsItem extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  Text("This is Super First Laptop",
+                  Text(products.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,style: TextStyle(
                       fontWeight: FontWeight.w500,
@@ -60,8 +65,9 @@ class ProductsItem extends StatelessWidget {
                       color: Colors.greenAccent
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(" 4.5 ",style: TextStyle(fontSize: 18,color: Colors.white),),
+                        Text(products.rating.toString()+" ",style: TextStyle(fontSize: 18,color: Colors.white),),
                         Icon(Icons.star,color: Colors.white,)
                       ],
                     ),
@@ -69,7 +75,7 @@ class ProductsItem extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  Text("\u0024 256.56",style: TextStyle(fontSize: 25),),
+                  Text("\u0024 ${products.price}",style: TextStyle(fontSize: 25),),
 
                 ],
               ),

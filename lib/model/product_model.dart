@@ -1,16 +1,16 @@
 // To parse this JSON data, do
 //
-//     final calenderImgModel = calenderImgModelFromJson(jsonString);
+//     final productModel = productModelFromJson(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-List<CalenderImgModel> calenderImgModelFromJson(String str) => List<CalenderImgModel>.from(json.decode(str).map((x) => CalenderImgModel.fromJson(x)));
+List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(json.decode(str).map((x) => ProductModel.fromJson(x)));
 
-String calenderImgModelToJson(List<CalenderImgModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String productModelToJson(List<ProductModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class CalenderImgModel {
-  CalenderImgModel({
+class ProductModel {
+  ProductModel({
     required this.id,
     required this.brand,
     required this.name,
@@ -52,7 +52,7 @@ class CalenderImgModel {
   String apiFeaturedImage;
   List<ProductColor> productColors;
 
-  factory CalenderImgModel.fromJson(Map<String, dynamic> json) => CalenderImgModel(
+  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     id: json["id"],
     brand: brandValues.map[json["brand"]],
     name: json["name"],
@@ -63,8 +63,8 @@ class CalenderImgModel {
     productLink: json["product_link"],
     websiteLink: json["website_link"],
     description: json["description"],
-    rating: json["rating"] == null ? null : json["rating"].toDouble(),
-    category: json["category"] == null ? null : json["category"],
+    rating: json["rating"] == null ? 0.0 : json["rating"].toDouble(),
+    category: json["category"] == null ? "null" : json["category"],
     productType: json["product_type"],
     tagList: List<dynamic>.from(json["tag_list"].map((x) => x)),
     createdAt: DateTime.parse(json["created_at"]),
@@ -97,12 +97,12 @@ class CalenderImgModel {
   };
 }
 
-enum Brand { MAYBELLINE, TESTING }
+enum Brand { MAYBELLINE ,TESTING}
 
 final brandValues = EnumValues({
-  "maybelline": Brand.MAYBELLINE,
+  "maybelline": Brand.MAYBELLINE
 },{
-  Brand.TESTING:"testing"
+  Brand.TESTING : "testing"
 }
 );
 
@@ -117,7 +117,7 @@ class ProductColor {
 
   factory ProductColor.fromJson(Map<String, dynamic> json) => ProductColor(
     hexValue: json["hex_value"],
-    colourName: json["colour_name"] == null ? null : json["colour_name"],
+    colourName: json["colour_name"] == null ? "color" : json["colour_name"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -131,7 +131,6 @@ class EnumValues<T> {
   Map<T, String> reverseMap;
 
   EnumValues(this.map,this.reverseMap);
-
 
   Map<T, String> get reverse {
     if (reverseMap == null) {

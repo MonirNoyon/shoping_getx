@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:shoping_getx/view-model/product_controller.dart';
 import 'package:shoping_getx/view/products_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,15 +12,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ProductsController productsController = Get.put(ProductsController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios,color: Colors.black,),
+          icon: const Icon(Icons.dehaze_sharp,color: Colors.black,),
           onPressed: (){},
         ),
         actions: [
@@ -44,18 +47,19 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Expanded(
-              child: GridView.builder(
-                  gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 5,
-                    crossAxisSpacing: 5,
-                    childAspectRatio: 0.65,
-                  ),
-                  itemCount: 9,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context,index){
-                    return ProductsItem();
-                  }),
+              child: Obx(()=> GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 5,
+                      crossAxisSpacing: 5,
+                      mainAxisExtent: size.height*0.4,
+                    ),
+                    itemCount: productsController.productsList.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context,index){
+                      return ProductsItem(products: productsController.productsList[index]);
+                    }),
+              ),
             ),
           ],
         ),
