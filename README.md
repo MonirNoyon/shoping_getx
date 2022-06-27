@@ -1,6 +1,8 @@
 # shoping_getx
 
-A new Flutter project.
+This is Shoping App using getx as state management library
+What uses in this application are
+[Getx,Dependency Injection,MVVM]
 
 ## Getting Started
 
