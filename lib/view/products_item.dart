@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shoping_getx/model/product_model.dart';
 import 'package:get/get.dart';
+import 'package:shoping_getx/view-model/card_controller.dart';
+import 'package:shoping_getx/view-model/controller.dart';
 
 class ProductsItem extends StatelessWidget {
    ProductsItem({Key? key,required this.products});
    ProductModel products;
+
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +84,17 @@ class ProductsItem extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  Text("\u0024 ${products.price}",style: TextStyle(fontSize: 25,fontFamily: 'avenir'),),
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [
+                   Text("\u0024 ${products.price}",style: TextStyle(fontSize: 25,fontFamily: 'avenir'),),
+                   IconButton(
+                     onPressed: (){
+                       cardController.addCartItems(products);
+                     },
+                     icon: const Icon(Icons.add_shopping_cart),
+                   ),
+                 ],)
 
                 ],
               ),

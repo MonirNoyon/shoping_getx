@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:shoping_getx/view-model/card_controller.dart';
+import 'package:shoping_getx/view-model/controller.dart';
 import 'package:shoping_getx/view-model/product_controller.dart';
 import 'package:shoping_getx/view/products_item.dart';
 
@@ -12,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ProductsController productsController = Get.put(ProductsController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +30,32 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {},
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.shopping_cart_outlined,
-              color: Colors.black,
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Stack(
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {},
+                ),
+                Positioned(
+                  right: 5,
+                    top: 1,
+                    child: Container(
+                      height: 22,
+                      width: 22,
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Center(child: Obx(()=>Text("${cardController.productCartItems.length}"))),
+                    )
+                )
+              ],
             ),
-            onPressed: () {},
           )
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:shoping_getx/services/remote_services.dart';
 
 
 class ProductsController extends GetxController{
+  static ProductsController instance = Get.find();
   var isLoading = true.obs;
   var productsList = <ProductModel>[].obs;
 
