@@ -49,6 +49,7 @@ class ProductModel {
   List<ProductColor> productColors;
 
   var isFavourite = false.obs;
+  var quantity = 1.obs;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     id: json["id"],

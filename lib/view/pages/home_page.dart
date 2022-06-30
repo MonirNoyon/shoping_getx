@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,8 @@ import 'package:shoping_getx/view-model/card_controller.dart';
 import 'package:shoping_getx/view-model/controller.dart';
 import 'package:shoping_getx/view-model/product_controller.dart';
 import 'package:shoping_getx/view/products_item.dart';
+import 'package:shoping_getx/view/widget/bottom_nav_bar.dart';
+import 'package:shoping_getx/view/widget/card_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,7 +42,20 @@ class _HomePageState extends State<HomePage> {
                     Icons.shopping_cart_outlined,
                     color: Colors.black,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(25),topLeft: Radius.circular(25))
+                        ),
+                        builder: (context)=>Wrap(
+                          children: [
+                            CardPage()
+                          ],
+                        ),
+                    );
+                  },
                 ),
                 Positioned(
                   right: 5,
@@ -98,6 +114,13 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        backgroundColor: Colors.deepPurpleAccent,
+        child: const Icon(Icons.message),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
