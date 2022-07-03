@@ -22,66 +22,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.dehaze_sharp,
-            color: Colors.black,
-          ),
-          onPressed: () {},
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Stack(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.shopping_cart_outlined,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(topRight: Radius.circular(25),topLeft: Radius.circular(25))
-                        ),
-                        builder: (context)=>Wrap(
-                          children: [
-                            CardPage()
-                          ],
-                        ),
-                    );
-                  },
-                ),
-                Positioned(
-                  right: 5,
-                    top: 1,
-                    child: Container(
-                      height: 22,
-                      width: 22,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Center(child: Obx(()=>Text("${cardController.productCartItems.length}"))),
-                    )
-                )
-              ],
-            ),
-          )
-        ],
-      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: Column(
           children: [
             Row(
               children: [
-                Expanded(
+                const Expanded(
                     child: Text(
                   "ShopX",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
@@ -107,20 +54,13 @@ class _HomePageState extends State<HomePage> {
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           return ProductsItem(
-                              products: productsController.productsList[index]);
+                              products: productsController.productsList[index],index: index,);
                         }),
               ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        backgroundColor: Colors.deepPurpleAccent,
-        child: const Icon(Icons.message),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
