@@ -3,8 +3,11 @@
 This is Shoping App using getx as state management library \\
 What uses in this application are
 [Getx,Dependency Injection,MVVM]
-#Home Page
+
+
 ![Screenshot 2022-07-04 083118](https://user-images.githubusercontent.com/44537702/177072073-b031ee26-1263-4a7d-b91b-5e1f5b2ae3ef.png)
+![Screenshot 2022-07-04 083238](https://user-images.githubusercontent.com/44537702/177072258-99a5adf8-9884-46e0-bcf1-b1b6720daf6c.png)
+![Screenshot 2022-07-04 083639](https://user-images.githubusercontent.com/44537702/177072270-855f124c-2e38-4f6a-8c68-69403abc8fee.png)
 
 
 ## Getting Started
