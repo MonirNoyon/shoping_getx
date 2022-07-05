@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shoping_getx/view-model/controller.dart';
+import 'package:shoping_getx/view/pages/account_page.dart';
 import 'package:shoping_getx/view/pages/home_page.dart';
 import 'package:shoping_getx/view/widget/bottom_nav_bar.dart';
 import 'package:get/get.dart';
@@ -69,11 +70,11 @@ class Onboarding extends StatelessWidget {
     ),
       body: Obx(()=>IndexedStack(
           index: bottomNavBarController.tabIndex.value,
-          children: [
+          children: const[
             HomePage(),
             Center(child: Text("Buy Page")),
             Center(child: Text("Wishlist")),
-            Center(child: Text("Account")),
+            Account(),
           ],
         ),
       ),
